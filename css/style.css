@@ -1,0 +1,210 @@
+body {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+}
+
+#container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+}
+
+#game-field {
+	width: 600px;
+	height: 600px;
+	border: 3px solid black;
+	background-color: grey;
+	position: relative;
+}
+
+.line {
+	height: 10%;
+	width: 100%;
+	display: flex;
+	box-sizing: border-box;
+}
+
+.line div {
+	height: 100%;
+	width: 10%;
+	box-sizing: border-box;
+}
+
+#my-tank {
+	position: absolute;
+	width: 10%;
+	height: 10%;
+	background: url(pic/2tank.png) no-repeat center;
+	background-size: 180% 180%;
+	z-index: 2;
+	transition: top .3s linear, left .3s linear;
+}
+
+.my-tank_none {
+	display: none;
+}
+
+#enemy-tank {
+	position: absolute;
+	background: url(pic/1tank.png) no-repeat center;
+	background-size: 180% 180%;
+	width: 10%;
+	height: 10%;
+	z-index: 2;
+	transition: top .3s linear, left .3s linear;
+}
+
+#enemy-tank2 {
+	position: absolute;
+	background: url(pic/1tank.png) no-repeat center;
+	background-size: 180% 180%;
+	width: 10%;
+	height: 10%;
+	z-index: 2;
+	transition: top .3s linear, left .3s linear;
+}
+
+#enemy-shell {
+	position: absolute;
+	background: url(pic/shell.png) no-repeat center;
+	background-size: 20% 40%;
+	width: 10%;
+	height: 10%;
+	z-index: 1;
+	transition: top .3s linear, left .3s linear;
+}
+
+#enemy-shell2 {
+	position: absolute;
+	background: url(pic/shell.png) no-repeat center;
+	background-size: 20% 40%;
+	width: 10%;
+	height: 10%;
+	z-index: 1;
+	transition: top .3s linear, left .3s linear;
+}
+
+#my-shell {
+	position: absolute;
+	background: url(pic/shell.png) no-repeat center;
+	background-size: 20% 40%;
+	width: 10%;
+	height: 10%;
+	z-index: 1;
+	transition: top .3s linear, left .3s linear;
+}
+
+.tank_turn_0 {
+	transform: rotate(0deg);
+}
+
+.tank_turn_1 {
+	transform: rotate(90deg);
+}
+
+.tank_turn_2 {
+	transform: rotate(180deg);
+}
+
+.tank_turn_3 {
+	transform: rotate(270deg);
+}
+
+.cell_type_0 {
+
+}
+
+.cell_type_1 {
+	background: url(pic/brick-texture.jpg) no-repeat center;
+	background-size: cover;
+}
+
+.cell_type_2 {
+	background: url(pic/depositphotos_33822601-stock-photo-water-in-swimming-pool.jpg) no-repeat center;
+	background-size: cover;
+}
+
+#start-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	width: 30%;
+	background: url(pic/steel-stainless-background-lt.png) no-repeat center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	text-align: center;
+	padding: 10px 10px 50px 10px;
+	box-sizing: border-box;
+	border: 2px solid black;
+	z-index: 9;
+}
+
+#start-page h2,
+#end-page h2 {
+	text-transform: uppercase;
+	font-size: 30px;
+}
+
+#start-page p,
+#end-page p {
+	font-size: 20px;
+}
+
+#start-page img {
+	max-width: 228px;
+	margin-bottom: 10px;
+}
+
+#start-page input,
+#end-page input {
+	max-width: 100px;
+	font-size: 24px;
+}
+
+#end-page {
+	position: absolute;
+	background: url(pic/steel-stainless-background-lt.png) no-repeat center;
+	width: 30%;
+	background-color: red;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	text-align: center;
+	padding: 10px 10px 50px 10px;
+	box-sizing: border-box;
+	border: 2px solid black;
+	display: none;
+	z-index: 9;
+}
+
+#score {
+	display: flex;
+	justify-content: center;
+	vertical-align: center;
+	margin-right: 85px;
+}
+
+.score-x {
+	margin: auto 50px auto 0;
+	font-size: 30px;
+	text-transform: uppercase;
+}
+
+#score-num {
+	margin: auto 0;
+	font-size: 50px;
+}
+
+
+.score-destroyed {
+	width: 200px;
+	height: 100px;
+	background: url(pic/images.png) no-repeat center;
+	background-size: 60% 80%;
+}

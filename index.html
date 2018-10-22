@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple-tanks</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="js/my-js.js"></script>
+</head>
+<body>
+	<div id="start-page">
+		<h2>Simple tanks</h2>
+		<p>At your disposal is a tank. Destroy as many enemies as possible. When you destroy 10 enemies, two enemy tanks will act against you.</p>
+		<p>To move, use the keys:</p>
+		<img src="css/pic/Keyboard_White_Arrows.png" alt="">
+		<p>Use the SPACE to shoot.</p>
+		<input type="button" id="start" value="start">
+	</div>
+	<div id="end-page">
+		<h2>game over</h2>
+		<p>You destroyed: <span id="end_destroed">0</span> tanks</p>
+		<input type="button" id="restart" value="restart">
+	</div>
+	<div id="container">
+		<div id="score">
+			<div class="score-destroyed"></div>
+			<span class="score-x">x</span>
+			<span id="score-num">0</span>
+		</div>
+		<div id="game-field">
+			<div class="line">
+				<div id="line_0_cell_0"></div>
+				<div id="line_0_cell_1"></div>
+				<div id="line_0_cell_2"></div>
+				<div id="line_0_cell_3"></div>
+				<div id="line_0_cell_4"></div>
+				<div id="line_0_cell_5"></div>
+				<div id="line_0_cell_6"></div>
+				<div id="line_0_cell_7"></div>
+				<div id="line_0_cell_8"></div>
+				<div id="line_0_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_1_cell_0"></div>
+				<div id="line_1_cell_1"></div>
+				<div id="line_1_cell_2"></div>
+				<div id="line_1_cell_3"></div>
+				<div id="line_1_cell_4"></div>
+				<div id="line_1_cell_5"></div>
+				<div id="line_1_cell_6"></div>
+				<div id="line_1_cell_7"></div>
+				<div id="line_1_cell_8"></div>
+				<div id="line_1_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_2_cell_0"></div>
+				<div id="line_2_cell_1"></div>
+				<div id="line_2_cell_2"></div>
+				<div id="line_2_cell_3"></div>
+				<div id="line_2_cell_4"></div>
+				<div id="line_2_cell_5"></div>
+				<div id="line_2_cell_6"></div>
+				<div id="line_2_cell_7"></div>
+				<div id="line_2_cell_8"></div>
+				<div id="line_2_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_3_cell_0"></div>
+				<div id="line_3_cell_1"></div>
+				<div id="line_3_cell_2"></div>
+				<div id="line_3_cell_3"></div>
+				<div id="line_3_cell_4"></div>
+				<div id="line_3_cell_5"></div>
+				<div id="line_3_cell_6"></div>
+				<div id="line_3_cell_7"></div>
+				<div id="line_3_cell_8"></div>
+				<div id="line_3_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_4_cell_0"></div>
+				<div id="line_4_cell_1"></div>
+				<div id="line_4_cell_2"></div>
+				<div id="line_4_cell_3"></div>
+				<div id="line_4_cell_4"></div>
+				<div id="line_4_cell_5"></div>
+				<div id="line_4_cell_6"></div>
+				<div id="line_4_cell_7"></div>
+				<div id="line_4_cell_8"></div>
+				<div id="line_4_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_5_cell_0"></div>
+				<div id="line_5_cell_1"></div>
+				<div id="line_5_cell_2"></div>
+				<div id="line_5_cell_3"></div>
+				<div id="line_5_cell_4"></div>
+				<div id="line_5_cell_5"></div>
+				<div id="line_5_cell_6"></div>
+				<div id="line_5_cell_7"></div>
+				<div id="line_5_cell_8"></div>
+				<div id="line_5_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_6_cell_0"></div>
+				<div id="line_6_cell_1"></div>
+				<div id="line_6_cell_2"></div>
+				<div id="line_6_cell_3"></div>
+				<div id="line_6_cell_4"></div>
+				<div id="line_6_cell_5"></div>
+				<div id="line_6_cell_6"></div>
+				<div id="line_6_cell_7"></div>
+				<div id="line_6_cell_8"></div>
+				<div id="line_6_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_7_cell_0"></div>
+				<div id="line_7_cell_1"></div>
+				<div id="line_7_cell_2"></div>
+				<div id="line_7_cell_3"></div>
+				<div id="line_7_cell_4"></div>
+				<div id="line_7_cell_5"></div>
+				<div id="line_7_cell_6"></div>
+				<div id="line_7_cell_7"></div>
+				<div id="line_7_cell_8"></div>
+				<div id="line_7_cell_9"></div>
+			</div>
+			<div class="line">
+				<div id="line_8_cell_0"></div>
+				<div id="line_8_cell_1"></div>
+				<div id="line_8_cell_2"></div>
+				<div id="line_8_cell_3"></div>
+				<div id="line_8_cell_4"></div>
+				<div id="line_8_cell_5"></div>
+				<div id="line_8_cell_6"></div>
+				<div id="line_8_cell_7"></div>
+				<div id="line_8_cell_8"></div>
+				<div id="line_8_cell_9"></div>
+			</div>
+			<div id="my-tank"></div>
+			<div class="line">
+				<div id="line_9_cell_0"></div>
+				<div id="line_9_cell_1"></div>
+				<div id="line_9_cell_2"></div>
+				<div id="line_9_cell_3"></div>
+				<div id="line_9_cell_4"></div>
+				<div id="line_9_cell_5"></div>
+				<div id="line_9_cell_6"></div>
+				<div id="line_9_cell_7"></div>
+				<div id="line_9_cell_8"></div>
+				<div id="line_9_cell_9"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
