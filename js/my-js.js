@@ -23,6 +23,27 @@ function flag () {
 	else return false;
 }
 
+function checkHit () {
+	if ($("#hit").length > 0) {
+		return true;
+	}
+	else return false;
+}
+
+function checkHit2 () {
+	if ($("#hit2").length > 0) {
+		return true;
+	}
+	else return false;
+}
+
+function checkHit3 () {
+	if ($("#hit3").length > 0) {
+		return true;
+	}
+	else return false;
+}
+
 function checkEnemy () {
 	if ($("#enemy-tank2").length > 0) {
 		return true;
@@ -139,7 +160,7 @@ function createShell() {
 	$("#enemy-shell").addClass("tank_turn_" + enemyShell.direction);
 	$("#enemy-shell").css("top", enemyShell.y * cellSize + "%");
 	$("#enemy-shell").css("left", enemyShell.x * cellSize + "%");
-	window.shotId = window.setInterval(shot, 150);
+	window.shotId = window.setInterval(shot, 250);
 }
 
 function createMyShell () {
@@ -155,12 +176,46 @@ function createMyShell () {
 	window.myShotId = window.setInterval(myShot, 250);
 }
 
+function createMyHit () {
+	if (checkHit() == false) {
+		$("<div/>", {
+    		id: "hit"
+		}).appendTo("#game-field");
+		setTimeout(function () {
+		$("#hit").remove();
+		},1000);
+	}
+}
+
+function createEnemyHit () {
+	if (checkHit2() == false) {
+		$("<div/>", {
+    		id: "hit2"
+		}).appendTo("#game-field");
+		setTimeout(function () {
+		$("#hit2").remove();
+		},1000);
+	}
+}
+
+function createEnemyHit2 () {
+	if (checkHit3() == false) {
+		$("<div/>", {
+    		id: "hit3"
+		}).appendTo("#game-field");
+		setTimeout(function () {
+		$("#hit3").remove();
+		},1000);
+	}
+}
+
 function enemyActions () {
 	window.moveId = window.setInterval(move, 700);
 	window.turnId = window.setInterval(turn, 3000);
 }
 
 function shot () {
+	shellOff();
 	switch (enemyShell.direction) {
 		case 0:
 			enemyShell.y--;
@@ -179,10 +234,10 @@ function shot () {
 			$("#enemy-shell").css("left", enemyShell.x * cellSize + "%");
 			break;			
 	}
-	shellOff();
 }
 
 function myShot () {
+	myShellOff();
 	switch (myShell.direction) {
 		case 0:
 			myShell.y--;
@@ -201,25 +256,36 @@ function myShot () {
 			$("#my-shell").css("left", myShell.x * cellSize + "%");
 			break;			
 	}
-	myShellOff();
 }
 
 function myShellOff() {
 	if (myShell.y > 9) {
 		$("#my-shell").remove();
 		window.clearInterval(window.myShotId);
+		createMyHit();
+		$("#hit").css("top", (myShell.y - 0.5) * cellSize + "%");
+		$("#hit").css("left", myShell.x * cellSize + "%");
 	}
 	if (myShell.y < 0) {
 		$("#my-shell").remove();
 		window.clearInterval(window.myShotId);
+		createMyHit();
+		$("#hit").css("top", (myShell.y + 0.5) * cellSize + "%");
+		$("#hit").css("left", myShell.x * cellSize + "%");
 	}
 	if (myShell.x > 9) {
 		$("#my-shell").remove();
 		window.clearInterval(window.myShotId);
+		createMyHit();
+		$("#hit").css("top", myShell.y * cellSize + "%");
+		$("#hit").css("left", (myShell.x - 0.5) * cellSize + "%");
 	}
 	if (myShell.x < 0) {
 		$("#my-shell").remove();
 		window.clearInterval(window.myShotId);
+		createMyHit();
+		$("#hit").css("top", myShell.y * cellSize + "%");
+		$("#hit").css("left", (myShell.x + 0.5) * cellSize + "%");
 	}
 	if (
 		gameFieldArrey[myShell.y] &&
@@ -231,11 +297,17 @@ function myShellOff() {
 		gameFieldArrey[myShell.y][myShell.x] = 0;
 		$("#my-shell").remove();
 		window.clearInterval(window.myShotId);
+		createMyHit();
+		$("#hit").css("top", myShell.y * cellSize + "%");
+		$("#hit").css("left", myShell.x * cellSize + "%");
 	}
 	if (myShell.x == enemyTank.x && myShell.y == enemyTank.y) {
 		$("#enemy-tank").remove();
 		$("#my-shell").remove();
 		$("#enemy-shell").remove();
+		createMyHit();
+		$("#hit").css("top", myShell.y * cellSize + "%");
+		$("#hit").css("left", myShell.x * cellSize + "%");
 		window.clearInterval(window.myShotId);
 		window.clearInterval(window.shotId);
 		window.clearInterval(window.moveId);
@@ -248,6 +320,9 @@ function myShellOff() {
 		$("#enemy-tank2").remove();
 		$("#my-shell").remove();
 		$("#enemy-shell2").remove();
+		createMyHit();
+		$("#hit").css("top", myShell.y * cellSize + "%");
+		$("#hit").css("left", myShell.x * cellSize + "%");
 		window.clearInterval(window.myShotId);
 		window.clearInterval(window.shot2Id);
 		window.clearInterval(window.move2Id);
@@ -262,29 +337,44 @@ function myShellOff() {
 }
 
 function shellOff() {
-	if (enemyShell.y > 10) {
+	if (enemyShell.y > 9) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
+		createEnemyHit();
+		$("#hit2").css("top", (enemyShell.y - 0.5) * cellSize + "%");
+		$("#hit2").css("left", enemyShell.x * cellSize + "%");
 		createShell();
 	}
-	if (enemyShell.y < -1) {
+	if (enemyShell.y < 0) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
+		createEnemyHit();
+		$("#hit2").css("top", (enemyShell.y + 0.5) * cellSize + "%");
+		$("#hit2").css("left", enemyShell.x * cellSize + "%");
 		createShell();
 	}
-	if (enemyShell.x > 10) {
+	if (enemyShell.x > 9) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
+		createEnemyHit();
+		$("#hit2").css("top", enemyShell.y * cellSize + "%");
+		$("#hit2").css("left", (enemyShell.x - 0.5) * cellSize + "%");
 		createShell();
 	}
-	if (enemyShell.x < -1) {
+	if (enemyShell.x < 0) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
+		createEnemyHit();
+		$("#hit2").css("top", enemyShell.y * cellSize + "%");
+		$("#hit2").css("left", (enemyShell.x + 0.5) * cellSize + "%");
 		createShell();
 	}
 	if (gameFieldArrey[enemyShell.y] &&
 		gameFieldArrey[enemyShell.y][enemyShell.x] == 1
 	) {
+		createEnemyHit();
+		$("#hit2").css("top", enemyShell.y * cellSize + "%");
+		$("#hit2").css("left", enemyShell.x * cellSize + "%");
 		var idCell = "#line_" + enemyShell.y + "_cell_" + enemyShell.x;
 		$(idCell).removeClass();
 		$(idCell).addClass('cell_type_0');
@@ -294,6 +384,9 @@ function shellOff() {
 		createShell();
 	}
 	if (enemyShell.x == myTank.x && enemyShell.y == myTank.y) {
+		createEnemyHit();
+		$("#hit2").css("top", enemyShell.y * cellSize + "%");
+		$("#hit2").css("left", enemyShell.x * cellSize + "%");
 		$("#my-tank").addClass("my-tank_none")
 		$("#enemy-tank").remove();
 		$("#enemy-shell").remove();
@@ -309,6 +402,26 @@ function shellOff() {
 }
 
 function move () {
+	if (enemyTank.y == 0 && enemyTank.direction == 0) {
+		enemyTank.direction = 2;
+		$("#enemy-tank").removeClass();
+		$("#enemy-tank").addClass("tank_turn_" + enemyTank.direction);
+	}
+	if (enemyTank.y == 9 && enemyTank.direction == 2) {
+		enemyTank.direction = 0;
+		$("#enemy-tank").removeClass();
+		$("#enemy-tank").addClass("tank_turn_" + enemyTank.direction);
+	}
+	if (enemyTank.x == 0 && enemyTank.direction == 3) {
+		enemyTank.direction = 1;
+		$("#enemy-tank").removeClass();
+		$("#enemy-tank").addClass("tank_turn_" + enemyTank.direction);
+	}
+	if (enemyTank.x == 9 && enemyTank.direction == 1) {
+		enemyTank.direction = 3;
+		$("#enemy-tank").removeClass();
+		$("#enemy-tank").addClass("tank_turn_" + enemyTank.direction);
+	}
 	switch (enemyTank.direction) {
 		case 0:
 			if (enemyTank.y !== 0 && gameFieldArrey[enemyTank.y - 1][enemyTank.x] !== 1 && gameFieldArrey[enemyTank.y - 1][enemyTank.x] !== 2) enemyTank.y--;
@@ -412,6 +525,26 @@ function enemyActions2 () {
 }
 
 function move2 () {
+	if (enemyTank2.y == 0 && enemyTank2.direction == 0) {
+		enemyTank2.direction = 2;
+		$("#enemy-tank2").removeClass();
+		$("#enemy-tank2").addClass("tank_turn_" + enemyTank2.direction);
+	}
+	if (enemyTank2.y == 9 && enemyTank2.direction == 2) {
+		enemyTank2.direction = 0;
+		$("#enemy-tank2").removeClass();
+		$("#enemy-tank2").addClass("tank_turn_" + enemyTank2.direction);
+	}
+	if (enemyTank2.x == 0 && enemyTank2.direction == 3) {
+		enemyTank2.direction = 1;
+		$("#enemy-tank2").removeClass();
+		$("#enemy-tank2").addClass("tank_turn_" + enemyTank2.direction);
+	}
+	if (enemyTank2.x == 9 && enemyTank2.direction == 1) {
+		enemyTank2.direction = 3;
+		$("#enemy-tank2").removeClass();
+		$("#enemy-tank2").addClass("tank_turn_" + enemyTank2.direction);
+	}
 	switch (enemyTank2.direction) {
 		case 0:
 			if (enemyTank2.y !== 0 && gameFieldArrey[enemyTank2.y - 1][enemyTank2.x] !== 1 && gameFieldArrey[enemyTank2.y - 1][enemyTank2.x] !== 2) enemyTank2.y--;
@@ -439,6 +572,7 @@ function turn2 () {
 }
 
 function shot2 () {
+	shellOff2();
 	switch (enemyShell2.direction) {
 		case 0:
 			enemyShell2.y--;
@@ -457,31 +591,45 @@ function shot2 () {
 			$("#enemy-shell2").css("left", enemyShell2.x * cellSize + "%");
 			break;			
 	}
-	shellOff2();
 }
 
 function shellOff2() {
 	if (enemyShell2.y > 9) {
 		$("#enemy-shell2").remove();
 		window.clearInterval(window.shot2Id);
+		createEnemyHit2();
+		$("#hit3").css("top", (enemyShell2.y - 0.5) * cellSize + "%");
+		$("#hit3").css("left", enemyShell2.x * cellSize + "%");
 		createShell2();
 	}
 	if (enemyShell2.y < 0) {
 		$("#enemy-shell2").remove();
 		window.clearInterval(window.shot2Id);
+		createEnemyHit2();
+		$("#hit3").css("top", (enemyShell2.y + 0.5) * cellSize + "%");
+		$("#hit3").css("left", enemyShell2.x * cellSize + "%");
 		createShell2();
 	}
 	if (enemyShell2.x > 9) {
 		$("#enemy-shell2").remove();
 		window.clearInterval(window.shot2Id);
+		createEnemyHit2();
+		$("#hit3").css("top", enemyShell2.y * cellSize + "%");
+		$("#hit3").css("left", (enemyShell2.x - 0.5) * cellSize + "%");
 		createShell2();
 	}
 	if (enemyShell2.x < 0) {
 		$("#enemy-shell2").remove();
 		window.clearInterval(window.shot2Id);
+		createEnemyHit2();
+		$("#hit3").css("top", enemyShell2.y * cellSize + "%");
+		$("#hit3").css("left", (enemyShell2.x + 0.5) * cellSize + "%");
 		createShell2();
 	}
 	if (gameFieldArrey[enemyShell2.y][enemyShell2.x] == 1) {
+		createEnemyHit2();
+		$("#hit3").css("top", enemyShell2.y * cellSize + "%");
+		$("#hit3").css("left", enemyShell2.x * cellSize + "%");
 		var idCell2 = "#line_" + enemyShell2.y + "_cell_" + enemyShell2.x;
 		$(idCell2).removeClass();
 		$(idCell2).addClass('cell_type_0');
@@ -491,6 +639,9 @@ function shellOff2() {
 		createShell2();
 	}
 	if (enemyShell2.x == myTank.x && enemyShell2.y == myTank.y) {
+		createEnemyHit2();
+		$("#hit3").css("top", enemyShell2.y * cellSize + "%");
+		$("#hit3").css("left", enemyShell2.x * cellSize + "%");
 		$("#my-tank").addClass("my-tank_none")
 		$("#enemy-tank").remove();
 		$("#enemy-shell").remove();

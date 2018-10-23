@@ -9,6 +9,7 @@ body {
 	height: 100vh;
 	display: flex;
 	align-items: center;
+	overflow: hidden;
 }
 
 #game-field {
@@ -44,6 +45,33 @@ body {
 
 .my-tank_none {
 	display: none;
+}
+
+#hit {
+	position: absolute;
+	width: 10%;
+	height: 10%;
+	background: url(pic/orig.gif) no-repeat center;
+	background-size: cover;
+	z-index: 3;
+}
+
+#hit2 {
+	position: absolute;
+	width: 10%;
+	height: 10%;
+	background: url(pic/orig.gif) no-repeat center;
+	background-size: cover;
+	z-index: 3;
+}
+
+#hit3 {
+	position: absolute;
+	width: 10%;
+	height: 10%;
+	background: url(pic/orig.gif) no-repeat center;
+	background-size: cover;
+	z-index: 3;
 }
 
 #enemy-tank {
