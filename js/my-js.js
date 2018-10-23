@@ -7,6 +7,7 @@ var cellSize = 10;
 var score = 0;
 var enemyTank2 = {direction: 0, x:15, y:15};
 var enemyShell2 = {direction: 0, x:0, y:0};
+var tankMove = false;
 
 function init() {
 	start();
@@ -179,7 +180,6 @@ function shot () {
 			break;			
 	}
 	shellOff();
-	console.log(enemyShell.x, enemyShell.y);
 }
 
 function myShot () {
@@ -338,7 +338,12 @@ function turn () {
 function myTankMove () {
 	myTank.x = 0;
 	myTank.y = 9;
-	$('html').keydown(function(event){
+	$('html').keyup(function(event){
+		if(tankMove) return;
+		tankMove = true;
+		setTimeout(function() {
+			tankMove = false;
+		}, 300);
   		switch (event.keyCode) {
   			case 38:
   				myTank.direction = 0;
