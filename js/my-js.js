@@ -179,6 +179,7 @@ function shot () {
 			break;			
 	}
 	shellOff();
+	console.log(enemyShell.x, enemyShell.y);
 }
 
 function myShot () {
@@ -261,27 +262,29 @@ function myShellOff() {
 }
 
 function shellOff() {
-	if (enemyShell.y > 9) {
+	if (enemyShell.y > 10) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
 		createShell();
 	}
-	if (enemyShell.y < 0) {
+	if (enemyShell.y < -1) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
 		createShell();
 	}
-	if (enemyShell.x > 9) {
+	if (enemyShell.x > 10) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
 		createShell();
 	}
-	if (enemyShell.x < 0) {
+	if (enemyShell.x < -1) {
 		$("#enemy-shell").remove();
 		window.clearInterval(window.shotId);
 		createShell();
 	}
-	if (gameFieldArrey[enemyShell.y][enemyShell.x] == 1) {
+	if (gameFieldArrey[enemyShell.y] &&
+		gameFieldArrey[enemyShell.y][enemyShell.x] == 1
+	) {
 		var idCell = "#line_" + enemyShell.y + "_cell_" + enemyShell.x;
 		$(idCell).removeClass();
 		$(idCell).addClass('cell_type_0');
