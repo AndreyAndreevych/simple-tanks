@@ -384,9 +384,6 @@ function shellOff() {
 		createShell();
 	}
 	if (enemyShell.x == myTank.x && enemyShell.y == myTank.y) {
-		createEnemyHit();
-		$("#hit2").css("top", enemyShell.y * cellSize + "%");
-		$("#hit2").css("left", enemyShell.x * cellSize + "%");
 		$("#my-tank").addClass("my-tank_none")
 		$("#enemy-tank").remove();
 		$("#enemy-shell").remove();
@@ -397,7 +394,7 @@ function shellOff() {
 		$("#end-page").css("display", "block");
 		var result = $("#score-num").text();
 		$("#end_destroed").text(result);
-		$('html').off("keydown");
+		$('html').off("keyup");
 	}
 }
 
@@ -516,7 +513,7 @@ function createShell2() {
 	$("#enemy-shell2").addClass("tank_turn_" + enemyShell2.direction);
 	$("#enemy-shell2").css("top", enemyShell2.y * cellSize + "%");
 	$("#enemy-shell2").css("left", enemyShell2.x * cellSize + "%");
-	window.shot2Id = window.setInterval(shot2, 150);
+	window.shot2Id = window.setInterval(shot2, 250);
 }
 
 function enemyActions2 () {
@@ -639,9 +636,6 @@ function shellOff2() {
 		createShell2();
 	}
 	if (enemyShell2.x == myTank.x && enemyShell2.y == myTank.y) {
-		createEnemyHit2();
-		$("#hit3").css("top", enemyShell2.y * cellSize + "%");
-		$("#hit3").css("left", enemyShell2.x * cellSize + "%");
 		$("#my-tank").addClass("my-tank_none")
 		$("#enemy-tank").remove();
 		$("#enemy-shell").remove();
@@ -652,7 +646,7 @@ function shellOff2() {
 		$("#end-page").css("display", "block");
 		var result = $("#score-num").text();
 		$("#end_destroed").text(result);
-		$('html').off("keydown");
+		$('html').off("keyup");
 	}
 }
 
